@@ -50,6 +50,7 @@ def guardian_hate():
     guardrss = feedparser.parse(
         'https://www.theguardian.com/society/hate-crime/rss')
 
+    # Currently only grabs 20 articles, there are 200+ available
     for i in range(20):
         res = requests.get(guardrss['entries'][i]['link'])
         res.raise_for_status()
