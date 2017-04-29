@@ -2,6 +2,7 @@ import requests
 import bs4
 import feedparser
 import pandas as pd
+import LocalCrawl
 
 
 # NY Times Hate Crimes feed
@@ -130,5 +131,6 @@ if __name__ == '__main__':
     nyt0 = nyt_local()
     grd1 = guardian_hate()
     grd0 = guardian_uk()
-    articles = pd.concat([nyt1, nyt0, grd1, grd0])
+    local1 = LocalCrawl.localart()
+    articles = pd.concat([nyt1, nyt0, grd1, grd0, local1])
     articles.to_csv('Articles.csv')
