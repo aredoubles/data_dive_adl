@@ -25,7 +25,7 @@ def nyt_hate():
 
 
 # NY Times feed on NY local news
-def nyt_loca():
+def nyt_local():
     nytrss = feedparser.parse(
         'https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/section/nyregion/rss.xml')
 
@@ -43,3 +43,8 @@ def nyt_loca():
 
             # Insert a line break after each article
             text_file.write('\n\n')
+
+
+if  __name__ =='__main__':
+    nyt_hate()
+    nyt_local()
