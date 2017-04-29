@@ -15,7 +15,7 @@ def nyt_hate():
         # The below is specific to the NYT
         thetext = starch.find_all(class_='story-body-text')
 
-        with open("Output.txt", "a") as text_file:
+        with open("NYT-Hate.txt", "a") as text_file:
             for tag in thetext:
                 text_file.write(tag.text.strip())
                 text_file.write(' ')
@@ -36,7 +36,7 @@ def nyt_local():
         # The below is specific to the NYT
         thetext = starch.find_all(class_='story-body-text')
 
-        with open("Output.txt", "a") as text_file:
+        with open("NYT-NewYork.txt", "a") as text_file:
             for tag in thetext:
                 text_file.write(tag.text.strip())
                 text_file.write(' ')
@@ -45,6 +45,30 @@ def nyt_local():
             text_file.write('\n\n')
 
 
+# Guardian feed on hate crime
+def guardian_hate():
+    guardrss = feedparser.parse(
+        'https://www.theguardian.com/society/hate-crime/rss')
+
+    for i in range(20):
+        res = requests.get(guardrss['entries'][i]['link'])
+        res.raise_for_status()
+        starch = bs4.BeautifulSoup(res.text, 'html5lib')
+        # The below is specific to The Guardian
+        thetext = starch.find_all('div', itemprop='articleBody')
+
+        with open("Guardian-Hate.txt", "a") as text_file:
+            for tag in thetext:
+                string = tag.text.strip()
+                string = string.replace('\r', ' ').replace('\n', ' ')
+                text_file.write(string)
+
+            # Insert a line break after each article
+            text_file.write('\n\n')
+
+
+
 if  __name__ =='__main__':
     nyt_hate()
     nyt_local()
+    guardian_hate()
