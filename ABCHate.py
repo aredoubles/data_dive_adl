@@ -39,11 +39,13 @@ def main():
             u = (abc_hate_url_paginated(p))
             for u in get_urls(u):
                 print(cnt, u[:50])
-                txt = full_text(u)
+                try:
+                    txt = full_text(u)
+                except newspaper.ArticleException:
+                    continue
                 res.append([u, txt, source, label])
                 cnt += 1
-    except newspaper.ArticleException:
-        pass
+        
     finally:
         df = pd.DataFrame(res, columns=columns)
         df.to_csv('abc-hate.csv', index=False)
