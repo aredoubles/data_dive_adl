@@ -85,14 +85,14 @@ def guardian_hate():
 
         guardhate[idlink] = full
 
-        build = pd.DataFrame.from_dict(guardhate, orient='index')
-        build.columns = ['Text']
-        build['Source'] = 'The Guardian'
-        build['Hate crime'] = 1
-        build.index.names = ['URL']
-        build.to_csv('Guardian1.csv')
+    build = pd.DataFrame.from_dict(guardhate, orient='index')
+    build.columns = ['Text']
+    build['Source'] = 'The Guardian'
+    build['Hate crime'] = 1
+    build.index.names = ['URL']
+    build.to_csv('Guardian1.csv')
 
-        return build
+    return build
 
 
 def guardian_uk():
@@ -115,14 +115,14 @@ def guardian_uk():
 
         guarduk[idlink] = full
 
-        build = pd.DataFrame.from_dict(guarduk, orient='index')
-        build.columns = ['Text']
-        build['Source'] = 'The Guardian'
-        build['Hate crime'] = 0
-        build.index.names = ['URL']
-        build.to_csv('Guardian0.csv')
+    build = pd.DataFrame.from_dict(guarduk, orient='index')
+    build.columns = ['Text']
+    build['Source'] = 'The Guardian'
+    build['Hate crime'] = 0
+    build.index.names = ['URL']
+    build.to_csv('Guardian0.csv')
 
-        return build
+    return build
 
 
 if __name__ == '__main__':
