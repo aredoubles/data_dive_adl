@@ -33,6 +33,7 @@ def mergecrawl():
                     df['text'][i] = fulltext
                     '''
                 df.columns = ['url', 'text', 'source', 'label']
+                df['text'] = df['text'].str.slice(start=0, stop=32000)
                 df['text'] = df['text'].str.replace('\n', ' ')
                 # Append to prev pandas df
                 # What if we're starting out, and it's empty?
