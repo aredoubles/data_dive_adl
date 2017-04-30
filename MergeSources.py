@@ -26,22 +26,20 @@ def mergecrawl():
                 # Read CSV to pandas
                 df = pd.read_csv(f)
                 # Clean the text columns
-                '''
-                for i in range(df.shape[0]):
-                    fulltext = df['text'][i]    # Iterate over records
-                    fulltext = fulltext.replace('\r', ' ').replace('\n', ' ')
-                    df['text'][i] = fulltext
-                    '''
                 df.columns = ['url', 'text', 'source', 'label']
                 df['text'] = df['text'].str.slice(start=0, stop=32000)
                 df['text'] = df['text'].str.replace('\n', ' ')
-                # Append to prev pandas df
-                # What if we're starting out, and it's empty?
 
                 # Check if class column is 0,1 or T,F, adjust to 0,1 if latter
                 df['label'] = df['label'].apply(score_to_numeric)
 
+                df = df.set_index('url')
+
                 fulldf = pd.concat([fulldf, df])
+                # fulldf = pd.concat([fulldf, df], keys='url')
+
+                # fulldf = fulldf.set_index('url')
+                # fulldf.drop(['Unnamed: 0'])
 
                 fulldf.to_csv('articles-all.csv')
 
